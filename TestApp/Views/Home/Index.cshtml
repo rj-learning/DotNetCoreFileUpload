@@ -3,7 +3,12 @@
 }
 
 <input type="file" id="FileUpload1" multiple />
-<input type="button" id="btnUpload" value="Upload Files" />
+<div>
+    <label>Enter First Name :</label>
+    <input type="text" id="nameText" maxlength="50" />
+
+</div>
+<input type="button" id="btnUpload" value="Submit Form with Files" />
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script>
@@ -24,7 +29,7 @@
                     fileData.append("files", files[i]);
                 }
                 // Adding one more key to FormData object
-                fileData.append('First', 'Manas');
+                fileData.append('FirstName', $("#nameText").val());
 
                 $.ajax({
                     url: '/Home/UploadFiles',

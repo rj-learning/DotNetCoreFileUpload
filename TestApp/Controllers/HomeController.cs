@@ -40,12 +40,17 @@ namespace TestApp.Controllers
         public async Task<IActionResult> UploadFiles(MyForm myForm)
         {
             var files = myForm.Files;
+            // First Name 
+            string name = myForm.FirstName;
+
+            // check All files
             foreach (IFormFile source in files)
             {
                 string filename = ContentDispositionHeaderValue.Parse(source.ContentDisposition).FileName.Trim('"');
 
                 filename = this.EnsureCorrectFilename(filename);
                 string fileWithPath = this.GetPathAndFilename(filename);
+                // Create directory if not exist
                 Directory.CreateDirectory(Path.GetDirectoryName(fileWithPath));
 
                 using (FileStream output = System.IO.File.Create(fileWithPath))
@@ -63,8 +68,7 @@ namespace TestApp.Controllers
 
         public class MyForm
         {
-            public string First { get; set; }
-            public string Middle { get; set; }
+            public string FirstName { get; set; }
             public IList<IFormFile> Files { get; set; }
         }
 
